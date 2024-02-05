@@ -1,14 +1,19 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { useModalLogin, useModalRegister } from "@/hooks";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { Avatar } from "@/components";
-import { MenuItem } from "./menu-item";
-import { useModalRegister } from "@/hooks";
+import { MenuItem } from "../menu-item";
+import { UserMenuProps } from "./types";
+import { signOut } from "next-auth/react";
 
-export const UserMenu = () => {
+export const UserMenu = (props: UserMenuProps) => {
+  const { currentUser } = props;
+
   const registerModal = useModalRegister();
+  const loginModal = useModalLogin();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,10 +43,22 @@ export const UserMenu = () => {
       {isOpen && (
         <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
           <div className="flex flex-col cursor-pointer">
-            <>
-              <MenuItem label="Login" onClick={() => undefined} />
-              <MenuItem label="Sing Up" onClick={registerModal.onOpen} />
-            </>
+            {currentUser ? (
+              <>
+                <MenuItem label="My trips" onClick={() => undefined} />
+                <MenuItem label="My favorites" onClick={() => undefined} />
+                <MenuItem label="My reservations" onClick={() => undefined} />
+                <MenuItem label="My properties" onClick={() => undefined} />
+                <MenuItem label="Airbnb my home" onClick={() => undefined} />
+                <hr />
+                <MenuItem label="Logout" onClick={() => signOut()} />
+              </>
+            ) : (
+              <>
+                <MenuItem label="Login" onClick={loginModal.onOpen} />
+                <MenuItem label="Sing Up" onClick={registerModal.onOpen} />
+              </>
+            )}
           </div>
         </div>
       )}
