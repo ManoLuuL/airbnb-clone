@@ -9,6 +9,7 @@ import { Heading } from "./components/heading";
 import { Input } from "@/components/inputs";
 import { Modal } from "../modal";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useModalRegister } from "@/hooks";
 import { useState } from "react";
@@ -83,13 +84,13 @@ export const ModalRegister = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => undefined}
+        onClick={() => signIn("google")}
       />
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => undefined}
+        onClick={() => signIn("github")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="flex flex-row items-center gap-2 justify-center">
