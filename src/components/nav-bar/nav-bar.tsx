@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo, Search, UserMenu } from "./components";
+import { Categories, Logo, Search, UserMenu } from "./components";
 
 import { Container } from "../container";
 import { NavBarProps } from "./types";
@@ -19,6 +19,7 @@ export const NavBar = (props: NavBarProps) => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };
