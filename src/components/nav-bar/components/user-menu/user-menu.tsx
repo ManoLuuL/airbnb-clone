@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { useModalLogin, useModalRegister } from "@/hooks";
+import { useModalLogin, useModalRegister, useModalRent } from "@/hooks";
 
 import { AiOutlineMenu } from "react-icons/ai";
 import { Avatar } from "@/components";
@@ -14,6 +14,7 @@ export const UserMenu = (props: UserMenuProps) => {
 
   const registerModal = useModalRegister();
   const loginModal = useModalLogin();
+  const rentModal = useModalRent();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,11 +22,16 @@ export const UserMenu = (props: UserMenuProps) => {
     setIsOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) return loginModal.onOpen();
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => undefined}
+          onClick={onRent}
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
         >
           Airbnb in home

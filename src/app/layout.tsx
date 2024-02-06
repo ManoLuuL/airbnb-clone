@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { ModalLogin, ModalRegister, NavBar } from "@/components";
+import { ModalLogin, ModalRegister, ModalRent, NavBar } from "@/components";
 
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
@@ -27,6 +27,7 @@ export default async function RootLayout({
         <ToasterProvider />
         <ModalRegister />
         <ModalLogin />
+        <ModalRent />
         <NavBar currentUser={currentUser} />
         {children}
       </body>
