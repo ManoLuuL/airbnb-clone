@@ -22,3 +22,7 @@ export type SafeReservation = Omit<
   endDate: string;
   listing: SafeListing;
 };
+
+export type FavoriteListingParams = {
+  listingId?: string;
+};

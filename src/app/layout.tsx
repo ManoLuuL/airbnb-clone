@@ -1,6 +1,13 @@
 import "./globals.css";
 
-import { ModalLogin, ModalRegister, ModalRent, NavBar } from "@/components";
+import {
+  ClientOnly,
+  ModalLogin,
+  ModalRegister,
+  ModalRent,
+  ModalSearch,
+  NavBar,
+} from "@/components";
 
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
@@ -24,12 +31,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <ToasterProvider />
-        <ModalRegister />
-        <ModalLogin />
-        <ModalRent />
-        <NavBar currentUser={currentUser} />
-        {children}
+        <ClientOnly>
+          <ToasterProvider />
+          <ModalLogin />
+          <ModalRegister />
+          <ModalSearch />
+          <ModalRent />
+          <NavBar currentUser={currentUser} />
+        </ClientOnly>
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );
